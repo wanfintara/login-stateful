@@ -33,16 +33,26 @@ class _LoginScreenState extends State<LoginScreen> {
         labelText: 'Email Address',
         hintText: 'you@example.com',
       ),
+      validator: (String value) {
+        if (!value.contains('@')) {
+          return 'Please enter a valid email';
+        }
+      },
     );
   }
 
   Widget passwordField() {
     return TextFormField(
+      // obscureText: true,
       decoration: InputDecoration(
         labelText: 'Password',
         hintText: 'Password',
       ),
-      // obscureText: true,
+      validator: (String value) {
+        if (value.length < 4) {
+          return 'Password must be at least 4 characters';
+        }
+      },
     );
   }
 
@@ -51,7 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
       color: Colors.blue,
       child: Text('Submit'),
       onPressed: () {
-        _formKey.currentState.reset();
+        // _formKey.currentState.reset();
+        print(_formKey.currentState.validate());
       },
     );
   }
